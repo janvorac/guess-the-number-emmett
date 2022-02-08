@@ -1,5 +1,5 @@
 from emmett import App, now
-from emmett.orm import Model, Field, belongs_to, has_many
+from emmett.orm import Model, Field, belongs_to, has_many, Database
 
 
 app = App(__name__)
@@ -17,3 +17,7 @@ class Guessed(Model):
     belongs_to('game')
 
     number = Field.int()
+
+
+db = Database(app)
+db.define_models(Game, Guessed)
