@@ -1,0 +1,117 @@
+body {
+    background: #D3F6D1;
+    font-family: Ribeye Marrow, monospace;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.box {
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.game-detail {
+    font-family: Ribeye Marrow, monospace;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+    margin: 12px auto;
+    padding: 5px 0;
+    width: 200px;
+    height: 45px
+}
+
+a.game-detail {
+    text-decoration: none;
+    font-size: 40px;
+    color: #5C8D89;
+}
+
+li.game-detail {
+    text-align: center;
+    background: #5C8D89;
+    color: white;
+}
+
+input {
+    background: #A7D7C5;
+    width: 200px;
+    height: 45px;
+    border: 0;
+    text-align: center;
+    margin: 12px auto;
+}
+
+.input-container {
+    width: 200px;
+    margin: 12px auto;
+}
+
+.centered-text {
+    width: 200px;
+    margin: 10px auto;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+.game-names-container {
+    margin: 50px;
+    width: 350px;
+    float: left;
+    height: 500px;
+    padding: 20px;
+    background: #5C8D89;
+}
+
+h3.index{
+    color: #FFFFFF;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: normal;
+}
+
+li.index {
+    font-size: 30px;
+}
+
+.message {
+    color: #D3F6D1;
+    font-size: 35px;
+}
+
+a.index{
+    color: #D3F6D1;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.new_game {
+    font-family: Ribeye Marrow, monospace;
+    width: 340px;
+    height: 71px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: #4F091D;
+    font-size: 40px;
+    color: #FFFFFF;
+    margin: 0px 50px;
+}
+
+body.with-plot {
+    background: #FFFFFF;
+}
+
+a.with-plot {
+    color: black;
+    text-decoration: none;
+    font-size: 40px;
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the number!</title>
+    {{include_static 'style.css'}}
+
+</head>
+<body>
+<h1 class="centered-text">{{=game.last_played_date}}</h1>
+{{=form}}
+
+<p class="centered-text">{{=guess_feedback}}</p>
+
+<ul>
+    {{for guess in guesses:}}
+        <li class="game-detail box">{{=guess.number}}</li>
+        {{pass}}
+</ul>
+
+</body>
+</html>

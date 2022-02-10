@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the number!</title>
+    {{include_static 'style.css'}}
+</head>
+<body>
+<a href="{{=url('new_game')}}" class="new_game">New game!</a>
+
+<ul class="games">
+    {{for game in games:}}
+    <li>
+        <a href="{{=url('play')}}">{{=game.last_played_date}}</a>
+    </li>
+    {{pass}}
+    {{if not games:}}
+    <li><em>No games available. Start playing!</em></li>
+    {{pass}}
+
+</ul>
+
+</body>
+</html>
