@@ -11,7 +11,7 @@
 <ul class="games">
     {{for game in games:}}
     <li>
-        <a href="{{=url('play')}}">{{=game.last_played_date}}</a>
+        <a href="{{=url('play', game.id)}}">{{=game.last_played_date}}</a>
     </li>
     {{pass}}
     {{if not games:}}

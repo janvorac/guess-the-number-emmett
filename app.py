@@ -1,5 +1,6 @@
 from emmett import App, now, redirect, url, abort
 from emmett.orm import Model, Field, belongs_to, has_many, Database
+from emmett.sessions import SessionManager
 import random
 
 
@@ -24,7 +25,12 @@ class Guessed(Model):
     number = Field.int()
 
     fields_rw = {
-        'game': False
+        'game': False,
+        'number': True
+    }
+
+    validation = {
+        'number': {'in': {'range': (0, 100)}}
     }
 
 
@@ -32,7 +38,8 @@ db = Database(app)
 db.define_models(Game, Guessed)
 
 app.pipeline = [
-    db.pipe
+    SessionManager.cookies('bflmpsvz'),
+    db.pipe,
 ]
 
 
@@ -50,7 +57,7 @@ async def new_game():
     return dict(game=game)
 
 
-@app.route("/<int:game_id>/detail")
+@app.route("/detail/<int:game_id>")
 async def play(game_id):
     def _validate_guess(form):
         form.params.game = game_id
@@ -58,9 +65,13 @@ async def play(game_id):
     if not game:
         abort(404)
     guesses = game.guesseds()
-    form = Guessed.form(onvalidation=_validate_guess)
+    form = await Guessed.form(onvalidation=_validate_guess)
+    print(form)
     if form.accepted:
+        print('accepted')
         redirect(url('play', game_id))
+    else:
+        print('not accepted')
     guess_feedback = ''
     return dict(
         game=game,
