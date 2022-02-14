@@ -52,7 +52,6 @@ async def index():
 @app.route("/new")
 async def new_game():
     game = Game.create(last_played_date=now(), correct_number=random.randint(0, 100))
-    print(game)
     redirect(url('play', game.id))
     return dict(game=game)
 
@@ -66,16 +65,42 @@ async def play(game_id):
         abort(404)
     guesses = game.guesseds()
     form = await Guessed.form(onvalidation=_validate_guess)
-    print(form)
     if form.accepted:
-        print('accepted')
+        guessed_num = int(form.params['number'])
+        print(guessed_num, game.correct_number)
+        if guessed_num == game.correct_number:
+            game.finished = True
+            redirect(url('inspect', game_id))
         redirect(url('play', game_id))
-    else:
-        print('not accepted')
-    guess_feedback = ''
+    guess_feedback = get_feedback(game)
     return dict(
         game=game,
         guesses=guesses,
         form=form,
         guess_feedback=guess_feedback
     )
+
+
+def get_feedback(game):
+    guesses = game.guesseds(orderby=~Guessed.id)
+    if not guesses:
+        return ''
+    print(guesses)
+    last_guess = int(guesses[0].number)
+    if last_guess == game.correct_number:
+        guess_feedback = 'Correct!'
+    elif last_guess < game.correct_number:
+        guess_feedback = 'Too low, shoot higher!'
+    elif last_guess > game.correct_number:
+        guess_feedback = 'Too high, shoot lower!'
+    return guess_feedback
+
+
+
+@app.route("/inspect/<int:game_id>")
+async def inspect(game_id):
+    game = Game.get(game_id)
+    if not game:
+        abort(404)
+    guesses = [guess.number for guess in game.guesseds()]
+    return guesses
