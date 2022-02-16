@@ -18,6 +18,9 @@ class Game(Model):
         'finished': False
     }
 
+    def __str__(self):
+        return f"Game {self.id}"
+
 
 class Guessed(Model):
     belongs_to('game')
@@ -45,8 +48,9 @@ app.pipeline = [
 
 @app.route("/")
 async def index():
-    games = Game.all().select()
-    return dict(games=games)
+    closed_games = db(db.games.finished == True).select()
+    open_games = db(db.games.finished == False).select()
+    return dict(closed_games=closed_games, open_games=open_games)
 
 
 @app.route("/new")
@@ -70,6 +74,7 @@ async def play(game_id):
         print(guessed_num, game.correct_number)
         if guessed_num == game.correct_number:
             game.finished = True
+            game.save()
             redirect(url('inspect', game_id))
         redirect(url('play', game_id))
     guess_feedback = get_feedback(game)

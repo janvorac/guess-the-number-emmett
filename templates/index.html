@@ -8,17 +8,28 @@
 <body>
 <a href="{{=url('new_game')}}" class="new_game">New game!</a>
 
-<ul class="games">
-    {{for game in games:}}
-    <li>
-        <a href="{{=url('play', game.id)}}">{{=game.last_played_date}}</a>
-    </li>
-    {{pass}}
-    {{if not games:}}
-    <li><em>No games available. Start playing!</em></li>
-    {{pass}}
+<div class="game-names-container box">
+    <h3 class="index">Open games</h3>
+    <ul class="index">
+        {{for open_game in open_games:}}
+        <li class="index">
+            <a class="index" href="{{=url('play', open_game.id)}}">Game {{=open_game.id}}</a>
+        </li>
+        {{pass}}
+    </ul>
+</div>
 
-</ul>
+<div class="game-names-container box">
+    <h3 class="index">Closed games</h3>
+    <ul class="index">
+        {{for closed_game in closed_games:}}
+        <li class="index">
+            <a class="index" href="{{=url('inspect', open_game.id)}}">Game {{=closed_game.id}}</a>
+        </li>
+        {{pass}}
+    </ul>
+</div>
+
 
 </body>
 </html>
