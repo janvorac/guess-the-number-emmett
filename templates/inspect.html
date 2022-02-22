@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game details</title>
+    {{include_static 'style.css'}}
+
+</head>
+<body class="with-plot">
+<nav>
+    <a class="with-plot" href="{{=url('index')}}">←</a>
+</nav>
+<div class="plot">
+    <iframe srcdoc="{{=plot}}" class="plot-container"></iframe>
+</div>
+</body>
+</html>

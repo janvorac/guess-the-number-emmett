@@ -115,3 +115,9 @@ a.with-plot {
     text-decoration: none;
     font-size: 40px;
 }
+
+.plot-container{
+    width: 800px;
+    height: 480px;
+    border: 0;
+}

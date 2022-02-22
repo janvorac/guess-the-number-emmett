@@ -3,6 +3,7 @@ from emmett.orm import Model, Field, belongs_to, has_many, Database
 from emmett.sessions import SessionManager
 import random
 
+import plotly.graph_objects as go
 
 app = App(__name__)
 
@@ -101,11 +102,22 @@ def get_feedback(game):
     return guess_feedback
 
 
-
 @app.route("/inspect/<int:game_id>")
 async def inspect(game_id):
     game = Game.get(game_id)
     if not game:
         abort(404)
-    guesses = [guess.number for guess in game.guesseds()]
-    return guesses
+    guesses = [int(guess.number) for guess in game.guesseds()]
+    plot = create_plot(guesses, game.correct_number)
+    return dict(plot=plot.to_html())
+
+
+def create_plot(ys, correct):
+    trace = go.Scatter(y=ys, name='guesses')
+    layout = go.Layout(
+        title='Guess history', xaxis={'title': 'round'}, yaxis={'title': 'Guessed number'}
+    )
+    fig = go.Figure(data=[trace], layout=layout)
+    fig.add_hline(y=correct)
+    fig.add_annotation(x=0, y=correct, showarrow=False, text='Correct value', yshift=10)
+    return fig
