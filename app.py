@@ -49,8 +49,8 @@ app.pipeline = [
 
 @app.route("/")
 async def index():
-    closed_games = db(db.games.finished == True).select()
-    open_games = db(db.games.finished == False).select()
+    closed_games = db(db.games.finished == True).select(orderby=~Game.id)
+    open_games = db(db.games.finished == False).select(orderby=~Game.id)
     return dict(closed_games=closed_games, open_games=open_games)
 
 

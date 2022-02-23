@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <title>Guess the number!</title>
     {{include_static 'style.css'}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ribeye+Marrow&display=swap" rel="stylesheet">
 </head>
 <body>
-<a href="{{=url('new_game')}}" class="new_game">New game!</a>
+<br>
+<a href="{{=url('new_game')}}" class="index box new_game">New game!</a>
+<br>
 
 <div class="game-names-container box">
     <h3 class="index">Open games</h3>
     <ul class="index">
         {{for open_game in open_games:}}
         <li class="index">
-            <a class="index" href="{{=url('play', open_game.id)}}">Game {{=open_game.id}}</a>
+            <a class="index" href="{{=url('play', open_game.id)}}">Game {{=open_game.id}} ({{=open_game.last_played_date.date()}})</a>
         </li>
         {{pass}}
     </ul>
@@ -24,7 +29,7 @@
     <ul class="index">
         {{for closed_game in closed_games:}}
         <li class="index">
-            <a class="index" href="{{=url('inspect', open_game.id)}}">Game {{=closed_game.id}}</a>
+            <a class="index" href="{{=url('inspect', closed_game.id)}}">Game {{=closed_game.id}} ({{=closed_game.last_played_date.date()}})</a>
         </li>
         {{pass}}
     </ul>
