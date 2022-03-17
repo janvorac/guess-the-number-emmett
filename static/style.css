@@ -41,6 +41,8 @@ li.game-detail {
 }
 
 input {
+    font-family: Ribeye Marrow, monospace;
+    font-size: 25px;
     background: #A7D7C5;
     width: 200px;
     height: 45px;
@@ -49,10 +51,11 @@ input {
     margin: 12px auto;
 }
 
-.input-container {
-    width: 200px;
-    margin: 12px auto;
+#guesseds_number {
+    font-family: Ribeye Marrow, monospace;
+    font-size: 35px;
 }
+
 
 .centered-text {
     width: 200px;

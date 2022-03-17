@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Guess the number!</title>
     {{include_static 'style.css'}}
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ribeye+Marrow&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1 class="centered-text">{{=game.last_played_date}}</h1>
-{{=form}}
+<h1 class="centered-text">{{=game.last_played_date.date()}}</h1>
+<div class="centered-text">{{=form}}</div>
 
 <p class="centered-text">{{=guess_feedback}}</p>
 

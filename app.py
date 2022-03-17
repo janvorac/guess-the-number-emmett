@@ -1,8 +1,8 @@
 from emmett import App, now, redirect, url, abort
 from emmett.orm import Model, Field, belongs_to, has_many, Database
 from emmett.sessions import SessionManager
+from emmett.forms import FormStyle
 import random
-
 import plotly.graph_objects as go
 
 app = App(__name__)
@@ -69,7 +69,9 @@ async def play(game_id):
     if not game:
         abort(404)
     guesses = game.guesseds()
-    form = await Guessed.form(onvalidation=_validate_guess)
+    form = await Guessed.form(
+        onvalidation=_validate_guess,
+    )
     if form.accepted:
         guessed_num = int(form.params['number'])
         print(guessed_num, game.correct_number)
