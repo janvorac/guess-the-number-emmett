@@ -74,7 +74,6 @@ async def play(game_id):
     )
     if form.accepted:
         guessed_num = int(form.params['number'])
-        print(guessed_num, game.correct_number)
         if guessed_num == game.correct_number:
             game.finished = True
             game.save()
@@ -93,7 +92,6 @@ def get_feedback(game):
     guesses = game.guesseds(orderby=~Guessed.id)
     if not guesses:
         return ''
-    print(guesses)
     last_guess = int(guesses[0].number)
     if last_guess == game.correct_number:
         guess_feedback = 'Correct!'
